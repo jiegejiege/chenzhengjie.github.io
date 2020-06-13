@@ -1,90 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>test</title>
-</head>
-<style>
-    @font-face {
-        font-family:'testfont';
-        src: url('./YouSheBiaoTiHei-2.ttf');
-    }
-    .test {
-        color:orangered;
-        font-size: 60px;
-        font-family:'testfont';
-        font-weight: 100;
-    }
-    body {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	height: 100vh;
-	background: #000;
-}
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"
+    />
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="http://img.souche.com/f2e/b479c204ffe8840359234a6a87624a59.png"
+    />
+    <link rel="stylesheet" href="/umi.css" />
+    <script>
+      window.routerBase = "/";
+    </script>
+    <script>
+      //! umi version: 3.2.3
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
 
-.box {
-	position: relative;
-	width: 50vmin;
-	height: 50vmin;
-	animation: spin 4s linear infinite;
-}
-
-@keyframes spin {
-	to {
-		transform: rotate(360deg);
-	}
-}
-
-.r,
-.g,
-.b {
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	animation: triangle 3s ease-in-out infinite;
-	mix-blend-mode: screen;
-}
-
-.r {
-	background: red;
-	animation-delay: 0s;
-}
-.g {
-	background: lime;
-	animation-delay: -1s;
-}
-.b {
-	background: blue;
-	animation-delay: -2s;
-}
-
-@keyframes triangle {
-	0% {
-		clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
-	}
-	50% {
-		clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-	}
-	100% {
-		clip-path: polygon(0 50%, 50% 0, 100% 50%, 50% 100%);
-	}
-}
-
-</style>
-<body>
-    .box
-	.r
-	.g
-    .b
-    <div class="box">
-        <div class="r"></div>
-        <div class="g"></div>
-        <div class="b"></div>
-    </div>
-    
-</body>
+    <script src="/umi.js"></script>
+  </body>
 </html>
