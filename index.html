@@ -1,1 +1,139 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name="theme-color" content="#000000"><link rel="manifest" href="./manifest.json"><link rel="shortcut icon" href="./favicon.ico"><title>我爱柯柯</title><link href="./static/css/main.790d3bdc.css" rel="stylesheet"></head><body><noscript>You need to enable JavaScript to run this app.</noscript><div id="root"></div><script type="text/javascript">var extend=function(o){for(var a=arguments.length,n=Array(1<a?a-1:0),e=1;e<a;e++)n[e-1]=arguments[e];return Object.assign.apply(Object,[{},o].concat(n))},parseColor=function(o){return"hsla("+o.h+","+o.s+"%,"+o.l+"%,"+o.a+")"},Color=extend.bind(null,{h:0,s:100,l:100,a:1}),Vector=extend.bind(null,{x:0,y:0}),Particle=extend.bind(null,{pos:Vector(),vel:Vector(),angle:0,speed:0,radius:0,rotation:0,color:Color()}),colors=[Color({h:20,s:100,l:50}),Color({h:200,l:50}),Color({h:300,l:50}),Color({h:100,l:40})],animationLoop=function o(a){a.animation&&a.animation(o.bind(null,a));var n=a.ctx,e=n.canvas,r=rough.canvas(e);n.clearRect(0,0,e.width,e.height),a.particles.map(function(o,a){o.pos.y-=o.speed,o.pos.x=a%2?o.pos.x+.2*Math.sin(o.angle):o.pos.x-.2*Math.cos(o.angle),o.angle+=.01,r.circle(o.pos.x,o.pos.y,o.radius,{fill:parseColor(o.color),roughness:1.5*Math.random(),hachureGap:o.hachureGap,hachureAngle:o.hachureAngle}),r.line(o.pos.x,o.pos.y+1.2*o.radius,o.pos.x,o.pos.y+o.radius/2,{bowing:3*Math.random()}),o.pos.y+3*o.radius<0&&(o.pos.y=e.height+3*o.radius,o.pos.x=Math.random()*(e.width-o.radius))})},scope={animation:requestAnimationFrame.bind(null),ctx:document.createElement("canvas").getContext("2d"),title:"Brian Douglas",rotation:0,particles:[]};!function(o){var a=o.ctx.canvas;a.width=window.innerWidth,a.height=window.innerHeight,document.body.appendChild(a);for(var n=50;n--;)o.particles.push(Particle({pos:{x:Math.random()*a.width,y:Math.random()*a.height},speed:Math.random()+.2,radius:60*Math.random()+20,color:colors[Math.floor(Math.random()*colors.length)],hachureAngle:90*Math.random(),hachureGap:8*Math.random()+1}));animationLoop(o)}(scope),/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)||window.addEventListener("resize",function(){scope.ctx.canvas.width=window.innerWidth,scope.ctx.canvas.height=window.innerHeight})</script><script type="text/javascript" src="./js/wmgwdw.js"></script><script type="text/javascript" src="./static/js/main.45f13cab.js"></script></body></html>
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <!-- Copyright © 2020 by www.x6k.com -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>爱柯柯呀</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <style>
+        html,
+        body {
+            height: 100%;
+        }
+
+        .wrap {
+            position: relative;
+            height: 100%;
+            width: 100%;
+            background-image: url('https://s3.ax1x.com/2021/01/17/sr7eFx.png');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .wrap-son {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 1;
+            background: rgba(59, 59, 59, 0.3);
+        }
+
+        .jumbotron {
+            background: rgba(255, 255, 255, 0);
+            color: #f5f5f5;
+        }
+
+        .love {
+            color: #ffffff;
+            margin: 0 20px;
+            line-height: 1.3;
+            font-weight: 300;
+        }
+
+        .hans-container {
+            position: fixed;
+            bottom: 0px;
+            width: 100%;
+            height: 120px;
+            z-index: 1;
+        }
+
+        .timer b {
+            font-size: 100px;
+        }
+
+        #s {
+            font-size: 100px;
+        }
+
+        #updatalove,
+        #to_comments {
+            margin: 0 10px;
+        }
+
+        .copy {
+            position: absolute;
+            bottom: 0;
+            color: #ffffff;
+            font-size: 12px;
+        }
+
+        /* 评论 */
+        .comment {
+            margin-top: 50px;
+            margin-bottom: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="wrap-son">
+            <div class="container-fluid">
+                <div class="box">
+                    <div class="jumbotron text-center">
+                        <h1>我们相恋了</h1>
+                        <h3 class="timer">
+                            <div class="row">
+                                <b id="d"></b> 天 <b id="h"></b> 时 <b id="m"></b> 分
+                            </div>
+                            <div class="row">
+                                <b id="s"></b> 秒
+                            </div>
+                        </h3>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <h4 class="love text-center"><span class="love-son"></span></h4>
+                </div>
+                <div id="hans-bolang"></div>
+                <audio autoplay="autoplay" loop="loop" id="bg-music">
+                    <source src="./img/becauseLove.mp3" type="audio/mpeg"></source>
+                </audio>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 计时器 -->
+    <script>
+        function timer() {
+            var start = new Date('2020/10/09 00:00:10'); // 2020.07.31 13:14:00
+            var t = new Date() - start;
+            var h = Math.floor(t / 1000 / 60 / 60 % 24);
+            if (h < 10) {
+                h = "0" + h;
+            }
+            var m = Math.floor(t / 1000 / 60 % 60);
+            if (m < 10) {
+                m = "0" + m;
+            }
+
+            var s = Math.floor(t / 1000 % 60);
+            if (s < 10) {
+                s = "0" + s;
+            }
+            document.getElementById('d').innerHTML = Math.floor(t / 1000 / 60 / 60 / 24);
+            document.getElementById('h').innerHTML = h;
+            document.getElementById('m').innerHTML = m;
+            document.getElementById('s').innerHTML = s;
+        }
+        timer();
+        setInterval(timer, 1000);
+    </script>
+</body>
+
+</html>
