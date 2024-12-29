@@ -1,208 +1,42 @@
 ﻿<!DOCTYPE html>
-<html lang="zh-CN">
-
+<html lang="en" >
 <head>
-    <!-- Copyright © 2020 by www.x6k.com -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>爱柯柯呀</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <style>
-        html,
-        body {
-            height: 100%;
-        }
-
-        .wrap {
-            position: relative;
-            height: 100%;
-            width: 100%;
-            background-image: url('https://s3.ax1x.com/2021/01/17/sr7eFx.png');
-            background-size: cover;
-            background-position: center;
-        }
-
-        .wrap-son {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            top: 1;
-            background: rgba(59, 59, 59, 0.3);
-        }
-
-        .jumbotron {
-            background: rgba(255, 255, 255, 0);
-            color: #f5f5f5;
-        }
-
-        .love {
-            color: #ffffff;
-            margin: 0 20px;
-            line-height: 1.3;
-            font-weight: 300;
-        }
-
-        .hans-container {
-            position: fixed;
-            bottom: 0px;
-            width: 100%;
-            height: 120px;
-            z-index: 1;
-        }
-
-        .timer b {
-            font-size: 100px;
-        }
-
-        #s {
-            font-size: 100px;
-        }
-
-        #updatalove,
-        #to_comments {
-            margin: 0 10px;
-        }
-
-        .copy {
-            position: absolute;
-            bottom: 0;
-            color: #ffffff;
-            font-size: 12px;
-        }
-
-        /* 评论 */
-        .comment {
-            margin-top: 50px;
-            margin-bottom: 100px;
-        }
-        /* #bingdundun-box {
-            width: 400px;
-            height: 400px;
-            background: gold;
-        } */
-    </style>
+  <meta charset="UTF-8">
+  <title>saro-rosy ❤️</title>
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Short+Stack&amp;family=Homemade+Apple&amp;display=swap'>
+  <link rel="stylesheet" href="./style.css">
 </head>
-
 <body>
-    <div class="wrap">
-        <div class="wrap-son">
-            <div class="container-fluid">
-                <div class="box">
-                    <div class="jumbotron text-center">
-                        <h1>我们相恋了</h1>
-                        <h3 class="timer">
-                            <div class="row">
-                                <b id="d"></b> 天 <b id="h"></b> 时 <b id="m"></b> 分
-                            </div>
-                            <div class="row">
-                                <b id="s"></b> 秒
-                            </div>
-                        </h3>
-                    </div>
-                </div>
-                <div class="row">
-                    <h4 class="love text-center"><span class="love-son"></span></h4>
-                </div>
-                <div id="hans-bolang"></div>
-            </div>
-            <div id="bingdundun-box"></div>
-        </div>
-    </div>
 
-
-    <!-- 计时器 -->
-    <script>
-        function timer() {
-            var start = new Date('2020/10/09 00:00:10'); // 2020.07.31 13:14:00
-            var t = new Date() - start;
-            var h = Math.floor(t / 1000 / 60 / 60 % 24);
-            if (h < 10) {
-                h = "0" + h;
-            }
-            var m = Math.floor(t / 1000 / 60 % 60);
-            if (m < 10) {
-                m = "0" + m;
-            }
-
-            var s = Math.floor(t / 1000 % 60);
-            if (s < 10) {
-                s = "0" + s;
-            }
-            document.getElementById('d').innerHTML = Math.floor(t / 1000 / 60 / 60 / 24);
-            document.getElementById('h').innerHTML = h;
-            document.getElementById('m').innerHTML = m;
-            document.getElementById('s').innerHTML = s;
-        }
-        timer();
-        setInterval(timer, 1000);
-    </script>
-    <script type="module">
-        import * as THREE from './js/three.module.js';
-
-        import { OrbitControls } from './js/OrbitControls.js';
-        import { GLTFLoader } from './js/GLTFLoader.js';
-
-        let camera, scene, renderer;
-
-        init();
-        render();
-
-        function init() {
-
-            const container = document.createElement( 'div' );
-            var dom = document.getElementById('bingdundun-box')
-            document.body.appendChild( container );
-
-            camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 0.25, 20 );
-            camera.position.set( 0, 0, 3 );
-
-            scene = new THREE.Scene();
-
-            const envmap = new THREE.TextureLoader().load( "model/env.jpg",function(texture){
-                const loader = new GLTFLoader().setPath( 'model/' );
-                loader.load( 'dwendwen.gltf', function ( gltf ) {
-                    gltf.scene.traverse( function ( child ) {
-                        if(child.name=="outer"||child.name=="mask"){
-                            child.material.envMap = texture;
-                            child.material.envMap.mapping = THREE.EquirectangularReflectionMapping;
-                            child.material.envMapIntensity=2;
-                        }else if(child.name=="body"){
-                            var map = child.material.map;
-                            child.material = new THREE.MeshToonMaterial({map:map});
-                        }
-                    } );
-
-                    scene.add( gltf.scene );
-                    render();
-                } );
-            });
-
-            renderer = new THREE.WebGLRenderer( { antialias: true } );
-            renderer.setPixelRatio( window.devicePixelRatio );
-            renderer.setSize( window.innerWidth, window.innerWidth );
-            container.appendChild( renderer.domElement );
-            
-            const controls = new OrbitControls( camera, renderer.domElement );
-            controls.addEventListener( 'change', render ); // use if there is no animation loop
-            controls.minDistance = 2;
-            controls.maxDistance = 10;
-            controls.target.set( 0, 0, - 0.2 );
-            controls.update();
-
-            window.addEventListener( 'resize', onWindowResize );
-        }
-
-        function onWindowResize() {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize( window.innerWidth, window.innerHeight );
-            render();
-        }
-
-        function render() {
-            renderer.render( scene, camera );
-        }
-    </script>
+<!-- Developed by Saravanan  -->
+<div class="paper heart">
+</div>
+<div class="paper image">
+  <p> and I fallen in</p>
+    <p>Love with You 😍 </p>
+    <img src="./img/jiajia1.jpg" />
+</div>
+<div class="paper image">
+  <p</p>
+  <img src="./img/jiajia2.jpg" />
+</div>
+<div class="paper image">
+  <p>How can be </p>
+   <p> someone so cute ❤️ </p>
+   <img src="./img/jiajia3.jpg" />
+</div>
+<div class="paper red">
+<p class="p1"> and My Favorite</p>
+<p class="p2">Girl 😍</p>
+</div>
+<div class="paper">
+<p class="p1">You are Cute </p>
+  <p class="p1">Amazing <span style="color: red !important;">❤️</span></p>
+</div>
+<div class="paper">
+<p class="p1">Drag the papers to move!</p>
+</div>
+<!-- javascript file -->
+  <script  src="script.js"></script>
 </body>
-
 </html>
